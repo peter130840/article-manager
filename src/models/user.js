@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const paramCheck = require('../utilities/paramCheck')
-//const Task = require('./task')
+//const Article = require('./article')
 
 const userSchema = new mongoose.Schema(
     {
@@ -98,10 +98,10 @@ userSchema.pre('save', async function(next) {
     next()
 })
 
-// Delete user tasks when user is removed
+// Delete user article when user is removed
 // userSchema.pre('remove', async function(next) {
 //     const user = this
-//     await Task.deleteMany({ owner: user._id })
+//     await Article.deleteMany({ owner: user._id })
 //     next()
 // })
 

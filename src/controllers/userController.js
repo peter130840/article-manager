@@ -13,7 +13,8 @@ class userController {
         try {
             paramCheck.ajvCheck(req.body)
             await user.save()
-            res.send(req.body)
+            const token = await user.generateAuthToken()
+            res.status(201).send({ user, token })
         } catch (e) {
             next(e)
         }
