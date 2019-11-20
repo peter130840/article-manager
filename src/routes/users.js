@@ -1,6 +1,7 @@
 const express = require('express')
 const Router = express.Router()
 const userController = require('../controllers/userController')
+const auth = require('../middlewares/auth')
 
 class usersRouter {
     constructor() {
@@ -10,7 +11,9 @@ class usersRouter {
 
     init() {
         this.router.post('/', userController.registUser)
-        this.router.get('/', userController.getUserDetail)
+        this.router.post('/login', userController.loginUser)
+        this.router.post('/logout', auth, userController.logoutUser)
+        this.router.post('/logoutAll', auth, userController.logoutAll)
     }
 }
 
