@@ -4,20 +4,11 @@ const ajv = new Ajv({ allErrors: true, coerceTypes: true })
 const innerSchema = { type: 'string', format: 'email' }
 const schema = {
     properties: {
-        from: { type: 'string', moment: { format: ['HH:mm'] } },
-        until: { type: 'string', moment: { format: ['HH:mm'] } },
-        start: { type: 'string', format: 'date' },
-        end: { type: 'string', format: 'date' },
         page: { type: 'number' },
         rowPerpage: { type: 'number' },
-        roomScale: { type: 'number' },
         email: { format: 'email' },
         subject: { type: 'string', maxLength: 50 },
         content: { type: 'string' },
-        startTime: { type: 'string', moment: { format: 'YYYY/MM/DD HH:ss' } },
-        endTime: { type: 'string', moment: { format: 'YYYY/MM/DD HH:ss' } },
-        roomAddress: { type: 'array', items: innerSchema },
-        attendees: { type: 'array', items: innerSchema },
     },
 }
 const validate = ajv.compile(schema)
