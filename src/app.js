@@ -15,7 +15,7 @@ class app {
         this.error()
     }
     middleware() {
-        this.app.use(express.json()) //Don't need bodyParser
+        this.app.use(express.json())
         this.app.use(express.urlencoded({ extended: false }))
         this.app.use(cors_define)
     }
