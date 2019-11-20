@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
-const paramCheck = require('../utilities/paramCheck')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-const Task = require('./task')
+const paramCheck = require('../utilities/paramCheck')
+//const Task = require('./task')
 
 const userSchema = new mongoose.Schema(
     {
@@ -46,11 +46,11 @@ const userSchema = new mongoose.Schema(
     }
 )
 
-userSchema.virtual('articles', {
-    ref: 'Articles',
-    localField: '_id',
-    foreignField: 'owner',
-})
+// userSchema.virtual('articles', {
+//     ref: 'Articles',
+//     localField: '_id',
+//     foreignField: 'owner',
+// })
 
 userSchema.methods.toJSON = function() {
     const user = this
@@ -99,11 +99,11 @@ userSchema.pre('save', async function(next) {
 })
 
 // Delete user tasks when user is removed
-userSchema.pre('remove', async function(next) {
-    const user = this
-    await Task.deleteMany({ owner: user._id })
-    next()
-})
+// userSchema.pre('remove', async function(next) {
+//     const user = this
+//     await Task.deleteMany({ owner: user._id })
+//     next()
+// })
 
 const User = mongoose.model('User', userSchema)
 

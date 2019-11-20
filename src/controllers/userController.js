@@ -1,13 +1,19 @@
 const paramCheck = require('../utilities/paramCheck')
+const User = require('../models/user')
 
 class userController {
     constructor() {
         this.getUserDetail = this.getUserDetail.bind(this)
+        this.registUser = this.registUser.bind(this)
     }
 
-    async registerUser(req, res, next) {
+    async registUser(req, res, next) {
+        const user = new User(req.body)
+        console.log(user)
         try {
-            paramCheck.ajvCheck(req.query)
+            paramCheck.ajvCheck(req.body)
+            await user.save()
+            res.send(req.body)
         } catch (e) {
             next(e)
         }

@@ -9,6 +9,7 @@ class usersRouter {
     }
 
     init() {
+        this.router.post('/', userController.registUser)
         this.router.get('/', userController.getUserDetail)
     }
 }

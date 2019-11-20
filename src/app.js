@@ -1,6 +1,7 @@
+require('dotenv').config({ path: './config/dev.env' })
 const express = require('express')
 const path = require('path')
-require('dotenv').config({ path: './config/dev.env' })
+require('./db/mongoose')
 const indexRouter = require('./routes/index')
 const usersRouter = require('./routes/users')
 const articleRouter = require('./routes/articles')
