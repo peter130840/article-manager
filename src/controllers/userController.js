@@ -11,7 +11,6 @@ class userController {
 
     async registUser(req, res, next) {
         const user = new User(req.body)
-        console.log(user)
         try {
             paramCheck.ajvCheck(req.body)
             await user.save()

@@ -46,11 +46,11 @@ const userSchema = new mongoose.Schema(
     }
 )
 
-// userSchema.virtual('articles', {
-//     ref: 'Articles',
-//     localField: '_id',
-//     foreignField: 'owner',
-// })
+userSchema.virtual('articles', {
+    ref: 'Articles',
+    localField: 'name',
+    foreignField: 'owner',
+})
 
 userSchema.methods.toJSON = function() {
     const user = this
@@ -99,11 +99,11 @@ userSchema.pre('save', async function(next) {
 })
 
 // Delete user article when user is removed
-// userSchema.pre('remove', async function(next) {
-//     const user = this
-//     await Article.deleteMany({ owner: user._id })
-//     next()
-// })
+userSchema.pre('remove', async function(next) {
+    const user = this
+    await Article.deleteMany({ owner: user.name })
+    next()
+})
 
 const User = mongoose.model('User', userSchema)
 

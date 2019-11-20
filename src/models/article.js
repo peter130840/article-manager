@@ -11,7 +11,7 @@ const articleSchema = new mongoose.Schema(
             default: 'no content!',
         },
         owner: {
-            type: mongoose.Schema.Types.ObjectId,
+            type: String,
             require: true,
             ref: 'User',
         },
