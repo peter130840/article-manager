@@ -1,4 +1,3 @@
-const paramCheck = require('../utilities/paramCheck')
 const Article = require('../models/article')
 
 class articleController {
@@ -63,7 +62,7 @@ class articleController {
     }
 
     async readArticles(req, res, next) {
-        const { page = 1, rowPerPage = 10, sortBy = 'createdAt', orderBy, backward = false } = req.query
+        const { page = 1, rowPerPage = 10, sortBy = 'createdAt', backward = false } = req.query
         const match = {}
         const sort = {}
 
@@ -92,8 +91,7 @@ class articleController {
     }
 
     async listArticles(req, res, next) {
-        const { page = 1, rowPerPage = 10, sortBy = 'createdAt', orderBy, backward = false } = req.query
-        const match = {}
+        const { page = 1, rowPerPage = 10, sortBy = 'createdAt', backward = false } = req.query
         const sort = {}
 
         if (req.query.sortBy) {
@@ -102,7 +100,11 @@ class articleController {
         }
 
         try {
-            const articles = await Article.find()
+            const articles = await Article.find().setOptions({
+                limit: parseInt(rowPerPage),
+                skip: (page - 1) * rowPerPage,
+                sort,
+            })
             res.send(articles)
         } catch (e) {
             next(e)

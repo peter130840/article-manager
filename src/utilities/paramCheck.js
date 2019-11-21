@@ -1,7 +1,6 @@
 const Ajv = require('ajv')
 const ajv = new Ajv({ allErrors: true, coerceTypes: true })
 
-const innerSchema = { type: 'string', format: 'email' }
 const schema = {
     properties: {
         page: { type: 'number' },
